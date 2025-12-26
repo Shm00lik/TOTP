@@ -17,10 +17,10 @@ public static class Hmac
         var outerKeyPad = Utils.Xor(blockSizedKey, outerPad);
         var innerKeyPad = Utils.Xor(blockSizedKey, innerPad);
 
-        var innerConcat = Utils.Concat(innerPad, message);
+        var innerConcat = Utils.Concat(innerKeyPad, message);
         var hashedInner = hash.ComputeHash(innerConcat);
 
-        var outerConcat = Utils.Concat(outerPad, hashedInner);
+        var outerConcat = Utils.Concat(outerKeyPad, hashedInner);
 
         return hash.ComputeHash(outerConcat);
     }
