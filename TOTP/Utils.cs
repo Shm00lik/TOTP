@@ -54,4 +54,14 @@ public static class Utils
 
         return result;
     }
+
+    public static byte GetLastNibble(byte b)
+    {
+        return (byte)(b & 0x0F);
+    }
+
+    public static byte[] ExtractBytes(byte[] data, int offset, int amount)
+    {
+        return data[(offset + 1)..(offset + amount + 1)];
+    }
 }

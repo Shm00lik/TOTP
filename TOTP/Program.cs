@@ -1,12 +1,11 @@
 ﻿using System.Security.Cryptography;
-using System.Text;
 using TOTP;
 
-using var hash = SHA256.Create();
+using var hash = SHA1.Create();
 
-var key = "key"u8.ToArray();
-var message = "The quick brown fox jumps over the lazy dog"u8.ToArray();
+var key = SimpleBase.Base32.Rfc4648.Decode("JBSWY3DPEHPK3PXP");
 
-var result = Hmac.Compute(key, message, hash, 64);
+var c = DateTimeOffset.UtcNow.ToUnixTimeSeconds() / 30;
 
-Console.WriteLine(Convert.ToHexStringLower(result));
+var otp = Hotp.Compute(key, (int)c, 6, hash, 64);
+Console.WriteLine(otp.ToString("D6"));
