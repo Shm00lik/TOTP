@@ -62,6 +62,23 @@ public static class Utils
 
     public static byte[] ExtractBytes(byte[] data, int offset, int amount)
     {
-        return data[(offset + 1)..(offset + amount + 1)];
+        return data[(offset)..(offset + amount)];
+    }
+
+    public static int Truncate(byte[] data, int offset, int amount, bool clearMsb = true)
+    {
+        var fourBytes = ExtractBytes(data, offset, amount);
+
+        if (clearMsb)
+        {
+            fourBytes[0] &= 0x7F;
+        }
+
+        if (BitConverter.IsLittleEndian)
+        {
+            Array.Reverse(fourBytes);
+        }
+
+        return BitConverter.ToInt32(fourBytes);
     }
 }

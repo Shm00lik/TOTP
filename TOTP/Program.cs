@@ -3,7 +3,7 @@ using TOTP;
 
 using var hash = SHA1.Create();
 
-var key = SimpleBase.Base32.Rfc4648.Decode("JBSWY3DPEHPK3PXP");
+var key = SimpleBase.Base32.Rfc4648.Decode("hellothisisatest");
 
 var c = DateTimeOffset.UtcNow.ToUnixTimeSeconds() / 30;
 
