@@ -81,4 +81,9 @@ public static class Utils
 
         return BitConverter.ToInt32(fourBytes);
     }
+
+    public static byte[] FromBase32(string base32)
+    {
+        return SimpleBase.Base32.Rfc4648.Decode(base32);
+    }
 }

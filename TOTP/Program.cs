@@ -2,10 +2,6 @@
 using TOTP;
 
 using var hash = SHA1.Create();
+var totp = Totp.Compute("hellothisisatest", 8, 30, hash, 64);
 
-var key = SimpleBase.Base32.Rfc4648.Decode("hellothisisatest");
-
-var c = DateTimeOffset.UtcNow.ToUnixTimeSeconds() / 30;
-
-var otp = Hotp.Compute(key, (int)c, 6, hash, 64);
-Console.WriteLine(otp.ToString("D6"));
+Console.WriteLine($"You code is: {totp}");
